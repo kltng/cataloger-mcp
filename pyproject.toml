@@ -1,0 +1,44 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "lcsh-mcp-server"
+version = "0.1.0"
+description = "A Model Context Protocol (MCP) server for Library of Congress Subject Headings"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+authors = [
+    {name = "KL Tang", email = "tklpsu@gmail.com"}
+]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Text Processing :: Linguistic",
+]
+dependencies = [
+    "mcp[cli]>=1.6.0",
+    "requests>=2.32.3",
+    "uvicorn>=0.27.0",
+]
+
+[project.urls]
+"Homepage" = "https://github.com/kltng/lcsh-mcp-server"
+"Bug Tracker" = "https://github.com/kltng/lcsh-mcp-server/issues"
+"Documentation" = "https://github.com/kltng/lcsh-mcp-server#readme"
+
+[project.scripts]
+lcsh-mcp-server = "lcsh_mcp_server.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/lcsh_mcp_server"]
+
+[tool.pytest.ini_options]
+pythonpath = [
+    "src",
+]
