@@ -1,4 +1,4 @@
-# LCSH MCP Server
+# cataloger mcp server
 
 A Model Context Protocol (MCP) server that provides access to the Library of Congress Subject Headings (LCSH) through a simple API interface.
 
@@ -10,10 +10,10 @@ This MCP server allows AI assistants like Claude to search the Library of Congre
 
 ### Option 1: Install from PyPI (Recommended)
 
-The easiest way to install the LCSH MCP server is directly from PyPI:
+The easiest way to install the cataloger mcp server is directly from PyPI:
 
 ```bash
-pip install lcsh-mcp-server
+pip install cataloger-mcp-server
 ```
 
 ### Option 2: Install from Source
@@ -21,8 +21,8 @@ pip install lcsh-mcp-server
 If you prefer to install from source:
 
 ```bash
-git clone https://github.com/kltng/lcsh-mcp-server.git
-cd lcsh-mcp-server
+git clone https://github.com/kltng/cataloger-mcp-server.git
+cd cataloger-mcp-server
 pip install -e .
 ```
 
@@ -30,7 +30,7 @@ pip install -e .
 
 1. **Install Claude Desktop** if you haven't already from [https://claude.ai/desktop](https://claude.ai/desktop)
 
-2. **Install the LCSH MCP Server** using one of the installation methods above
+2. **Install the cataloger mcp server** using one of the installation methods above
 
 3. **Open Claude Desktop** and navigate to Settings:
    - Click on your profile picture in the bottom-left corner
@@ -40,15 +40,15 @@ pip install -e .
    - In the Settings panel, click on "MCP Servers"
    - Click "Add Server"
    - Fill in the following details:
-     - **Name**: `LCSH Search`
-     - **Command**: `lcsh-mcp-server`
+     - **Name**: `cataloger mcp search`
+     - **Command**: `cataloger-mcp-server`
    - Click "Save"
 
 5. **Enable the Server**:
-   - Toggle the switch next to the LCSH Search server to enable it
+   - Toggle the switch next to the cataloger mcp search server to enable it
    - Claude will now have access to the LCSH search capabilities
 
-## Using the LCSH MCP Server with Claude
+## Using the cataloger mcp server with Claude
 
 Once the server is set up and enabled in Claude Desktop, you can ask Claude to search for Library of Congress Subject Headings. Here are some example prompts:
 

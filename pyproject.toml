@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "lcsh-mcp-server"
+name = "cataloger-mcp-server"
 version = "0.1.0"
 description = "A Model Context Protocol (MCP) server for Library of Congress Subject Headings"
 readme = "README.md"
@@ -28,15 +28,15 @@ dependencies = [
 ]
 
 [project.urls]
-"Homepage" = "https://github.com/kltng/lcsh-mcp-server"
-"Bug Tracker" = "https://github.com/kltng/lcsh-mcp-server/issues"
-"Documentation" = "https://github.com/kltng/lcsh-mcp-server#readme"
+"Homepage" = "https://github.com/kltng/cataloger-mcp-server"
+"Bug Tracker" = "https://github.com/kltng/cataloger-mcp-server/issues"
+"Documentation" = "https://github.com/kltng/cataloger-mcp-server#readme"
 
 [project.scripts]
-lcsh-mcp-server = "lcsh_mcp_server.cli:main"
+cataloger-mcp-server = "cataloger_mcp_server.cli:main"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/lcsh_mcp_server"]
+packages = ["src/cataloger_mcp_server"]
 
 [tool.pytest.ini_options]
 pythonpath = [

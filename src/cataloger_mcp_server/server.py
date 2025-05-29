@@ -1,5 +1,5 @@
 """
-LCSH MCP Server - Core server implementation.
+cataloger mcp server - Core server implementation.
 
 This module provides the MCP server functionality for searching
 Library of Congress Subject Headings (LCSH).
@@ -22,7 +22,7 @@ def search_lcsh(query: str) -> dict:
     # Construct the API endpoint for LCSH subject headings
     url = "https://id.loc.gov/authorities/subjects/suggest2"
     params = {"q": query, "count": 10}
-    headers = {"User-Agent": "lcsh-mcp-server/1.0 (contact: your-email@example.com)"}
+    headers = {"User-Agent": "cataloger mcp server/1.0 (contact: your-email@example.com)"}
     try:
         response = requests.get(url, params=params, headers=headers, timeout=10)
         response.raise_for_status()
@@ -72,7 +72,7 @@ def lcsh_resource(query: str) -> dict:
 
 def run_server(port=None):
     """
-    Run the LCSH MCP server.
+    Run the cataloger mcp server.
     
     Args:
         port (int, optional): Port number for HTTP/SSE mode. 
@@ -80,7 +80,7 @@ def run_server(port=None):
     """
     if port is not None:
         import uvicorn
-        print(f"Starting LCSH MCP server on HTTP port {port}")
+        print(f"Starting cataloger mcp server on HTTP port {port}")
         uvicorn.run(mcp.sse_app(), host="0.0.0.0", port=port)
     else:
         # Run in stdio mode (default)

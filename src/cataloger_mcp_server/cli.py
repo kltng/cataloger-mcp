@@ -1,5 +1,5 @@
 """
-Command-line interface for LCSH MCP Server.
+Command-line interface for cataloger mcp server.
 
 This module provides the entry point for the command-line interface.
 """
@@ -10,9 +10,9 @@ from .server import run_server
 
 
 def main():
-    """Main entry point for the LCSH MCP Server CLI."""
+    """Main entry point for the cataloger mcp server CLI."""
     parser = argparse.ArgumentParser(
-        description="LCSH MCP Server - A Model Context Protocol server for "
+        description="cataloger mcp server - A Model Context Protocol server for "
                     "Library of Congress Subject Headings"
     )
     parser.add_argument(

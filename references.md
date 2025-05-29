@@ -1,4 +1,4 @@
-# LCSH MCP Server
+# cataloger mcp server
 
 A Model Context Protocol (MCP) server that provides access to the Library of Congress Subject Headings (LCSH) through a simple API interface.
 
@@ -113,9 +113,9 @@ To use this MCP server with Claude Desktop:
 1. Start the server in stdio mode: `python server.py`
 2. In Claude Desktop, go to Settings > MCP Servers
 3. Add a new MCP server with the following configuration:
-   - Name: LCSH Search
-   - Command: `python /path/to/lcsh-mcp/server.py`
-4. Enable the server and start using the LCSH search capabilities in your conversations
+   - Name: cataloger mcp Search
+   - Command: `python /path/to/cataloger mcp/server.py`
+4. Enable the server and start using the cataloger mcp search capabilities in your conversations
 
 ## License
 
@@ -127,7 +127,7 @@ To use this MCP server with Claude Desktop:
 
 ## Testing with MCP Inspector
 
-The MCP Inspector is a visual testing tool specifically designed for MCP servers. Here's how to use it with your LCSH MCP server:
+The MCP Inspector is a visual testing tool specifically designed for MCP servers. Here's how to use it with your cataloger mcp server:
 
 ### Step 1: Install MCP Inspector
 
@@ -143,9 +143,9 @@ Or you can use it directly with npx without installing:
 npx @modelcontextprotocol/inspector
 ```
 
-### Step 2: Start Your LCSH MCP Server
+### Step 2: Start Your cataloger mcp server
 
-You need to have your LCSH MCP server running in HTTP/SSE mode for testing with the Inspector:
+You need to have your cataloger mcp server running in HTTP/SSE mode for testing with the Inspector:
 
 ```bash
 python server.py 6274
@@ -174,7 +174,7 @@ npx @modelcontextprotocol/inspector
 This will start the MCP Inspector web interface. By default, it runs on port 3000, so you can access it at http://localhost:3000 in your browser. Once the interface loads:
 
 1. Click on "Add Server"
-2. Enter a name for your server (e.g., "LCSH MCP Server")
+2. Enter a name for your server (e.g., "cataloger mcp server")
 3. Enter the URL: `http://localhost:6274`
 4. Click "Save"
 

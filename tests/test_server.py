@@ -1,9 +1,9 @@
 """
-Tests for the LCSH MCP Server package.
+Tests for the cataloger mcp server package.
 """
 
 import pytest
-from lcsh_mcp_server.server import search_lcsh
+from cataloger_mcp_server.server import search_lcsh
 import requests
 from unittest.mock import patch
 

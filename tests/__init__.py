@@ -1,3 +1,3 @@
 """
-Tests for the LCSH MCP Server package.
+Tests for the cataloger mcp server package.
 """

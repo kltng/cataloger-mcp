@@ -2,7 +2,7 @@ from mcp.server.fastmcp import FastMCP
 import requests
 import traceback
 
-mcp = FastMCP("LCSH Search Server")
+mcp = FastMCP("cataloger mcp server")
 
 @ mcp.tool()
 def search_lcsh(query: str) -> dict:
@@ -12,8 +12,8 @@ def search_lcsh(query: str) -> dict:
     """
     # Construct the API endpoint for LCSH subject headings
     url = "https://id.loc.gov/authorities/subjects/suggest2"
-    params = {"q": query, "count": 10}
-    headers = {"User-Agent": "lcsh-mcp-server/1.0 (contact: your-email@example.com)"}
+    params = {"q": query, "count": 25}
+    headers = {"User-Agent": "cataloger mcp server/1.0 (contact: your-email@example.com)"}
     try:
         response = requests.get(url, params=params, headers=headers, timeout=10)
         response.raise_for_status()
@@ -66,7 +66,7 @@ if __name__ == "__main__":
     if len(sys.argv) > 1 and sys.argv[1].isdigit():
         port = int(sys.argv[1])
         # Run as HTTP/SSE server
-        print(f"Starting LCSH MCP server on HTTP port {port}")
+        print(f"Starting cataloger mcp server on HTTP port {port}")
         uvicorn.run(mcp.sse_app(), host="0.0.0.0", port=port)
     else:
         # Run in stdio mode (default)
