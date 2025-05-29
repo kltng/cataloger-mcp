@@ -56,12 +56,14 @@ Once the server is set up and enabled in Claude Desktop, you can ask Claude to s
 - "Look up 'climate change' in LCSH and tell me the official subject headings."
 - "What are the LCSH terms related to 'quantum computing'?"
 
-Claude will use the MCP server to query the LCSH database and return the results.
+Claude will use the MCP server to query the LCSH and LCNAF databases and return the results.
+
+- "Find the name authority record for 'Smith, John Adam'."
 
 ## Features
 
-- **MCP Tool Integration**: Exposes a `search_lcsh` tool that can be used by AI assistants
-- **Resource Endpoint**: Provides a resource endpoint at `lcsh://search/{query}`
+- **MCP Tool Integration**: Exposes `search_lcsh` (for subject headings) and `search_name_authority` (for personal names) tools that can be used by AI assistants.
+- **Resource Endpoints**: Provides resource endpoints at `lcsh://search/{query}` and `lcnaf://search/{query}`.
 - **Robust Error Handling**: Gracefully handles API errors, connection issues, and unexpected response formats
 - **Multiple Response Formats**: Supports both dictionary (hits) and list response formats from the LCSH API
 

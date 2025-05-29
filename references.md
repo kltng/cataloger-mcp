@@ -9,7 +9,8 @@ This MCP server allows AI assistants to search the Library of Congress Subject H
 ## Features
 
 - **MCP Tool Integration**: Exposes a `search_lcsh` tool that can be used by AI assistants
-- **Resource Endpoint**: Provides a resource endpoint at `lcsh://search/{query}`
+- **MCP Tool Integration**: Exposes `search_lcsh` and `search_name_authority` tools that can be used by AI assistants
+- **Resource Endpoints**: Provides resource endpoints at `lcsh://search/{query}` and `lcnaf://search/{query}`
 - **Robust Error Handling**: Gracefully handles API errors, connection issues, and unexpected response formats
 - **Multiple Response Formats**: Supports both dictionary (hits) and list response formats from the LCSH API
 - **Dual Operation Modes**: 
@@ -95,6 +96,42 @@ Or in case of an error:
 ### Resource: `lcsh://search/{query}`
 
 A resource endpoint that returns the same data as the `search_lcsh` tool.
+
+### Tool: `search_name_authority`
+
+Searches the Library of Congress Name Authorities (LCNAF) for Personal Names using the public suggest2 API.
+
+**Parameters:**
+- `query` (string): The search term to look for in LCNAF (Personal Names)
+
+**Returns:**
+A dictionary with the following structure (same as `search_lcsh`):
+
+```json
+{
+  "results": [
+    {
+      "label": "Name Authority Label",
+      "uri": "http://id.loc.gov/authorities/names/..."
+    },
+    ...
+  ]
+}
+```
+
+Or in case of an error (same as `search_lcsh`):
+
+```json
+{
+  "error": "Error message",
+  "type": "ErrorType",
+  "traceback": "..."
+}
+```
+
+### Resource: `lcnaf://search/{query}`
+
+A resource endpoint that returns the same data as the `search_name_authority` tool.
 
 ## Testing
 
@@ -202,6 +239,16 @@ npx @modelcontextprotocol/inspector --cli http://localhost:6274 --method tools/c
 
 Web Interface:
 - Click on the "search_lcsh" tool
+
+#### Test the `search_name_authority` Tool
+
+CLI:
+```bash
+npx @modelcontextprotocol/inspector --cli http://localhost:6274 --method tools/call --tool-name search_name_authority --tool-arg query="Smith, John"
+```
+
+Web Interface:
+- Click on the "search_name_authority" tool
 - Enter "history" (or any search term) in the query field
 - Click "Execute"
 - View the results in the response panel
