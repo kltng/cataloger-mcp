@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "cataloger-mcp-server"
-version = "0.1.4"
+version = "0.1.5"
 description = "A Model Context Protocol (MCP) server for Library of Congress Subject Headings and Name Authorities."
 readme = "README.md"
 requires-python = ">=3.12"
