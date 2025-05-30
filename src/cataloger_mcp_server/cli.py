@@ -6,7 +6,7 @@ This module provides the entry point for the command-line interface.
 
 import sys
 import argparse
-from .server import run_server
+from .server import start_mcp_server
 
 
 def main():
@@ -24,7 +24,7 @@ def main():
     args = parser.parse_args()
     
     # Run the server with the provided port (or None for stdio mode)
-    run_server(args.port)
+    start_mcp_server(args.port)
 
 
 if __name__ == "__main__":

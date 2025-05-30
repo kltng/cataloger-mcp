@@ -9,7 +9,7 @@ This MCP server allows AI assistants to search the Library of Congress Subject H
 ## Features
 
 - **MCP Tool Integration**: Exposes a `search_lcsh` tool that can be used by AI assistants
-- **MCP Tool Integration**: Exposes `search_lcsh` and `search_name_authority` tools that can be used by AI assistants
+- **MCP Tool Integration**: Exposes `search_lcsh` (default left-anchored), `search_lcsh_keyword` (keyword-based), and `search_name_authority` tools that can be used by AI assistants
 - **Resource Endpoints**: Provides resource endpoints at `lcsh://search/{query}` and `lcnaf://search/{query}`
 - **Robust Error Handling**: Gracefully handles API errors, connection issues, and unexpected response formats
 - **Multiple Response Formats**: Supports both dictionary (hits) and list response formats from the LCSH API
@@ -96,6 +96,42 @@ Or in case of an error:
 ### Resource: `lcsh://search/{query}`
 
 A resource endpoint that returns the same data as the `search_lcsh` tool.
+
+### Tool: `search_lcsh_keyword`
+
+Searches the Library of Congress Subject Headings (LCSH) using the public suggest2 API with a keyword search type. This allows for more flexible matching compared to the default left-anchored search of `search_lcsh`.
+
+**Parameters:**
+- `query` (string): The search term to look for in LCSH.
+
+**API Behavior:**
+- Uses `searchtype: "keyword"` in the API request.
+- Requests up to `count: 50` results from the API.
+
+**Returns:**
+A dictionary with the following structure (same as `search_lcsh`):
+
+```json
+{
+  "results": [
+    {
+      "label": "Subject Heading Label",
+      "uri": "http://id.loc.gov/authorities/subjects/..."
+    },
+    ...
+  ]
+}
+```
+
+Or in case of an error (same as `search_lcsh`):
+
+```json
+{
+  "error": "Error message",
+  "type": "ErrorType",
+  "traceback": "..."
+}
+```
 
 ### Tool: `search_name_authority`
 
@@ -239,6 +275,19 @@ npx @modelcontextprotocol/inspector --cli http://localhost:6274 --method tools/c
 
 Web Interface:
 - Click on the "search_lcsh" tool
+
+#### Test the `search_lcsh_keyword` Tool
+
+CLI:
+```bash
+npx @modelcontextprotocol/inspector --cli http://localhost:6274 --method tools/call --tool-name search_lcsh_keyword --tool-arg query="artificial intelligence policy"
+```
+
+Web Interface:
+- Click on the "search_lcsh_keyword" tool
+- Enter "artificial intelligence policy" (or any search term) in the query field
+- Click "Execute"
+- View the results in the response panel
 
 #### Test the `search_name_authority` Tool
 
