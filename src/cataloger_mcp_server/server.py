@@ -1,8 +1,25 @@
 from mcp.server.fastmcp import FastMCP
 import requests
 import traceback
+import time
 
 mcp = FastMCP("cataloger mcp server")
+
+LOC_USER_AGENT = "cataloger-mcp-server/1.0 (https://github.com/kltng/cataloger-mcp)"
+LOC_HEADERS = {"User-Agent": LOC_USER_AGENT, "Accept": "application/json"}
+
+def loc_request_with_retry(url, params, timeout=10, max_retries=2):
+    """Make a LOC API request with retry on 429/503."""
+    for attempt in range(max_retries + 1):
+        response = requests.get(url, params=params, headers=LOC_HEADERS, timeout=timeout)
+        if response.ok:
+            return response
+        if response.status_code in (429, 503) and attempt < max_retries:
+            delay = 2 ** (attempt + 1)  # 2s, 4s
+            time.sleep(delay)
+            continue
+        response.raise_for_status()
+    return response
 
 @ mcp.tool()
 def search_lcsh(query: str) -> dict:
@@ -13,10 +30,8 @@ def search_lcsh(query: str) -> dict:
     # Construct the API endpoint for LCSH subject headings
     url = "https://id.loc.gov/authorities/subjects/suggest2"
     params = {"q": query, "count": 25}
-    headers = {"User-Agent": "cataloger mcp server/1.0 (contact: your-email@example.com)"}
     try:
-        response = requests.get(url, params=params, headers=headers, timeout=10)
-        response.raise_for_status()
+        response = loc_request_with_retry(url, params)
         # Try to parse JSON, but handle unexpected formats robustly
         try:
             data = response.json()
@@ -62,10 +77,8 @@ def search_lcsh_keyword(query: str) -> dict:
     # Construct the API endpoint for LCSH subject headings
     url = "https://id.loc.gov/authorities/subjects/suggest2"
     params = {"q": query, "searchtype": "keyword", "count": 50}
-    headers = {"User-Agent": "cataloger mcp server/1.0 (contact: your-email@example.com)"}
     try:
-        response = requests.get(url, params=params, headers=headers, timeout=10)
-        response.raise_for_status()
+        response = loc_request_with_retry(url, params)
         # Try to parse JSON, but handle unexpected formats robustly
         try:
             data = response.json()
@@ -112,10 +125,8 @@ def search_name_authority(query: str) -> dict:
     # Construct the API endpoint for LCNAF (Personal Names)
     url = "https://id.loc.gov/authorities/names/suggest2"
     params = {"q": query, "rdftype": "PersonalName", "count": 25}
-    headers = {"User-Agent": "cataloger mcp server/1.0 (contact: your-email@example.com)"}
     try:
-        response = requests.get(url, params=params, headers=headers, timeout=10)
-        response.raise_for_status()
+        response = loc_request_with_retry(url, params)
         # Try to parse JSON, but handle unexpected formats robustly
         try:
             data = response.json()
