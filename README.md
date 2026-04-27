@@ -48,6 +48,36 @@ pip install -e .
    - Toggle the switch next to the cataloger mcp search server to enable it
    - Claude will now have access to the LCSH search capabilities
 
+## Setting up with Cherry Studio
+
+1. **Install Cherry Studio** following the instructions in the Cherry documentation: <https://docs.cherry-ai.com/docs/en-us/advanced-basic/mcp/install>
+
+2. **Install the cataloger mcp server** using one of the installation methods above.
+
+3. **Prepare the MCP JSON config** for Cherry Studio. Use the "Import JSON" method with a snippet like:
+
+   ```json
+   {
+     "mcpServers": {
+       "cataloger-mcp": {
+         "command": "uvx",
+         "args": ["cataloger-mcp-server"]
+       }
+     }
+   }
+   ```
+
+   - You can change the key `"cataloger-mcp"` to whatever label you prefer in Cherry Studio.
+
+4. **Import into Cherry Studio**:
+   - Open Cherry Studio and go to **Settings → MCP** (or **MCP Servers**).
+   - Click **Add / Import from JSON** (wording may vary slightly by version).
+   - Paste the JSON snippet above and confirm to add the server.
+
+5. **Verify the server**:
+   - Ensure the new `cataloger-mcp-server` entry appears in the MCP list and is enabled.
+   - Start a new chat and confirm that Cherry Studio can call the cataloger MCP tools.
+
 ## Using the cataloger mcp server with Claude
 
 Once the server is set up and enabled in Claude Desktop, you can ask Claude to search for Library of Congress Subject Headings. Here are some example prompts:
